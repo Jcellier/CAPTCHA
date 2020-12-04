@@ -1,6 +1,7 @@
 from captcha.image import ImageCaptcha
 from captcha.audio import AudioCaptcha
-import string, random
+import string
+import random
 from PIL import Image
 from playsound import playsound
 
@@ -11,8 +12,9 @@ def generate_image_captcha(word):
     :return:
     """
     image = ImageCaptcha(width=280, height=90)  # Store the captcha into a variable image and define its dimentions
-    data = image.generate(word)  # Will be the text on the captcha
+    # data = image.generate(word)  # Will be the text on the captcha
     image.write(word, "demo.jpg")  # Generate the image and save it to the "demo.jpg" file
+
 
 def text_generator(length):
     """
@@ -41,17 +43,15 @@ def random_number(length):
     return "".join(arr)
 
 
-
 def display_captcha(image):
     """
     Function called to display the captcha image
     :param image: name of the image TODO : Add a path to read the captcha
     :return:
     """
-    # photo = plt.imread(image)
-    # return plt.imshow(photo)
     photo = Image.open(image)
     photo.show()
+
 
 def validate_captcha(word):
     """
@@ -65,6 +65,7 @@ def validate_captcha(word):
     else:
         print("You're a robot scum, GETOUTAHERE.")
 
+
 def generate_audio_captcha(numbers):
     """
     Function to generate the audio captcha.
@@ -72,9 +73,8 @@ def generate_audio_captcha(numbers):
     :return:
     """
     audio = AudioCaptcha()  # Store the captcha into a variable image
-    data_audio = audio.generate(numbers)
-
     audio.write(numbers, "demo.wav")
+
 
 def play_audio_captcha(file):
     """
@@ -97,15 +97,14 @@ def validate_audio_captcha(numbers):
     else:
         print("You're a robot scum, GETOUTAHERE.")
 
+
 if __name__ == "__main__":
-    # word = text_generator(6)            #   Part used for
-    # generate_image_captcha(word)        #   generating and using
-    # display_captcha("demo.jpg")         #   a image captcha
-    # validate_captcha(word)              #   and verify it via user input()
+    word = text_generator(6)            #   Part used for
+    generate_image_captcha(word)        #   generating and using
+    display_captcha("demo.jpg")         #   a image captcha
+    validate_captcha(word)              #   and verify it via user input()
 
-    numbers = random_number(4)            # Part used for
-    generate_audio_captcha(numbers)       # generating and using
-    play_audio_captcha("demo.wav")        # an audio captcha and
-    validate_audio_captcha(numbers)       # verify it via use input()
-
-
+    # numbers = random_number(4)            # Part used for
+    # generate_audio_captcha(numbers)       # generating and using
+    # play_audio_captcha("demo.wav")        # an audio captcha and
+    # validate_audio_captcha(numbers)       # verify it via use input()
